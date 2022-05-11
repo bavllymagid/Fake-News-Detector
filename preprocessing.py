@@ -7,8 +7,8 @@ from sklearn.metrics import *
 
 
 def stop_word_remove(text) :
-    table = {ord(char): u' ' for char in punctuation}
-    tokenized = [nltk.word_tokenize(review.translate(table)) for review in text]
+    # table = {ord(char): u' ' for char in punctuation}
+    tokenized = [nltk.word_tokenize(str(review)) for review in text]
     stop_words = nltk.corpus.stopwords.words('english')
     stop_words.append("“")
     stop_words.append("”")

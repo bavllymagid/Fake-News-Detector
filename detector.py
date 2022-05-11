@@ -4,6 +4,8 @@ from gensim.models import Word2Vec
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from preprocessing import *
+from nltk.stem import PorterStemmer
+
 
 
 
@@ -17,6 +19,11 @@ data.label = data.label.apply(label_trans)
 y = data['label']
 
 raw_text = data.text + data.title
+
+ps = PorterStemmer()
+
+raw_text = [[ps.stem(word) for word in sentence.split(" ")] for sentence in raw_text]
+
 
 filtered_sentence = stop_word_remove(raw_text)
 
