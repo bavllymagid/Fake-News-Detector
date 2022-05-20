@@ -36,5 +36,6 @@ def vectors_build(word_vectors, cleaned, word_model, length):
 
 
 def new_report(y0_test, y0_pred):
-    print ("  Accuracy: {:.5f}  Precision: {:.5f}"
-           .format(accuracy_score(y0_test, y0_pred), precision_score(y0_test, y0_pred)))
+    print ("  Accuracy: {:.5f}  Precision: {:.5f}  Recall: {:.5f}  F-1: {:.5f}"
+           .format(accuracy_score(y0_test, y0_pred), precision_score(y0_test, y0_pred), 
+                   recall_score(y0_test, y0_pred), f1_score(y0_test, y0_pred)))
