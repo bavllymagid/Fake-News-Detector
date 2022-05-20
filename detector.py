@@ -4,7 +4,6 @@ from gensim.models import Word2Vec
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from preprocessing import *
-from nltk.stem import PorterStemmer
 from sklearn import metrics
 
 data = pd.read_csv('news.csv')
@@ -18,10 +17,7 @@ y = data['label']
 
 raw_text = data.text + data.title
 
-ps = PorterStemmer()
-
-raw_text = [[ps.stem(word) for word in sentence.split(" ")] for sentence in raw_text]
-
+raw_text = stemming(raw_text)
 
 filtered_sentence = stop_word_remove(raw_text)
 
@@ -34,6 +30,7 @@ model = LogisticRegression().fit(X_train, Y_train)
 y_pred = model.predict(X_test)
 
 print("mean squared error: " , metrics.mean_squared_error(Y_test, y_pred))
+print("r2 score: ", metrics.r2_score(Y_test, y_pred))
 new_report(Y_test, y_pred)
 
 

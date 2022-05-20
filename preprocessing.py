@@ -3,11 +3,17 @@ import nltk
 # nltk.download('stopwords')
 from string import punctuation
 from sklearn.metrics import *
+from nltk.stem import PorterStemmer
 
 
+
+
+def stemming(raw_text):
+    ps = PorterStemmer()
+    raw_text = [[ps.stem(word) for word in sentence.split(" ")] for sentence in raw_text]
+    return raw_text
 
 def stop_word_remove(text) :
-    # table = {ord(char): u' ' for char in punctuation}
     tokenized = [nltk.word_tokenize(str(review)) for review in text]
     stop_words = nltk.corpus.stopwords.words('english')
     stop_words.append("“")
@@ -30,6 +36,5 @@ def vectors_build(word_vectors, cleaned, word_model, length):
 
 
 def new_report(y0_test, y0_pred):
-    print ("  Accuracy: {:.5f}  Precision: {:.5f}  Recall: {:.5f}  F-1: {:.5f}"
-           .format(accuracy_score(y0_test, y0_pred), precision_score(y0_test, y0_pred), 
-                   recall_score(y0_test, y0_pred), f1_score(y0_test, y0_pred)))
+    print ("  Accuracy: {:.5f}  Precision: {:.5f}"
+           .format(accuracy_score(y0_test, y0_pred), precision_score(y0_test, y0_pred)))
